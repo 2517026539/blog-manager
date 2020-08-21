@@ -47,7 +47,7 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: '首页', icon: 'dashboard', affix: true }
       }
     ]
   }
@@ -68,6 +68,34 @@ export const asyncRoutes = [
         meta: {
           title: '个人主页'
         }
+      }
+    ]
+  },
+  {
+    path: '/article',
+    component: Layout,
+    redirect: '/article/edit',
+    name: 'article',
+    children: [
+      {
+        path: 'edit',
+        name: 'pub',
+        component: () => import('./../views/articlepub'),
+        meta: { title: '文章编写 ', icon: 'edit' }
+      }
+    ]
+  },
+  {
+    path: '/contents',
+    component: Layout,
+    redirect: '/contents/list',
+    name: 'contents',
+    children: [
+      {
+        path: 'list',
+        name: 'list',
+        component: () => import('./../views/articlelist'),
+        meta: { title: '文章列表', icon: 'list' }
       }
     ]
   },
