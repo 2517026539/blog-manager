@@ -195,3 +195,29 @@ aside {
   height: 50px;
   line-height: 50px;
 }
+
+.edit-sticky {
+  display: flex;
+  justify-content: space-between;
+  background-color: #5e98ff;
+  height: 50px;
+  line-height: 50px;
+}
+
+.text-lignt-high{
+  color: #1890ff;
+  // border: 1px solid #3b91b6;
+  // background-color: #c1ffff;
+  border-radius: 2px;
+}
+
+.yPub{
+  color: #dbddeb;
+  font-weight: 600;
+  background-color: #13ce66;
+  opacity: 0.6;
+}
+
+.nPub{
+  color: #ffa949;
+}

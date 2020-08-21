@@ -66,7 +66,8 @@ export const asyncRoutes = [
         name: 'Profile',
         hidden: true,
         meta: {
-          title: '个人主页'
+          title: '个人主页',
+          roles: ['admin']
         }
       }
     ]
@@ -81,7 +82,13 @@ export const asyncRoutes = [
         path: 'edit',
         name: 'pub',
         component: () => import('./../views/articlepub'),
-        meta: { title: '文章编写 ', icon: 'edit' }
+        meta: { title: '文章编写 ', icon: 'edit', roles: ['admin'] }
+      }, {
+        path: 'edit/:id',
+        name: 'edit',
+        hidden: true,
+        component: () => import('./../views/articleedit'),
+        meta: { title: '文章编辑', icon: 'edit', activeMenu: '/contents/list', roles: ['admin'] }
       }
     ]
   },

@@ -10,6 +10,10 @@ import './styles/element-variables.scss'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
+import moment from 'moment'
+Vue.prototype.$moment = moment // 全局赋值
+moment.locale('zh-cn') // 汉化
+
 import '@/styles/index.scss' // global css
 
 import App from './App'
