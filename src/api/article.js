@@ -53,3 +53,19 @@ export function updateArticle(data) {
     data
   })
 }
+
+export function delArticle(data) {
+  return request({
+    url: '/article/del',
+    method: 'get',
+    params: data
+  })
+}
+
+export function updatePub(data) {
+  return request({
+    url: '/article/updatepub',
+    method: 'get',
+    params: data
+  })
+}

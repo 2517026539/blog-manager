@@ -20,6 +20,9 @@
           <a target="_blank" href="https://gitee.com/hzsljx/blog-manager">
             <el-dropdown-item>码云</el-dropdown-item>
           </a>
+          <a target="_blank" href="https://github.com/2517026539/blog-manager">
+            <el-dropdown-item>github</el-dropdown-item>
+          </a>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">退出登录</span>
           </el-dropdown-item>

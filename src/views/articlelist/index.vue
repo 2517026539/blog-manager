@@ -134,8 +134,8 @@
       >
         <template v-slot="scope">
           <el-button type="primary" icon="el-icon-edit" @click.native="editArticle(scope)" circle/>
-          <el-button type="danger" icon="el-icon-delete" @click.native="delArticle(scope)" circle/>
-          <el-button type="success" icon="el-icon-upload2" @click.native="pubArticle(scope)" circle/>
+          <el-button type="danger" icon="el-icon-delete" @click.native="del(scope)" circle/>
+          <el-button :type="scope.row.pub === 0 ? 'success' : 'warning'" :icon="scope.row.pub === 0 ? 'el-icon-upload2' : 'el-icon-download'" @click.native="pubArticle(scope)" circle/>
         </template>
       </el-table-column>
     </el-table>
@@ -151,7 +151,7 @@
 </template>
 
 <script>
-import { articleSort, getArticleList } from '../../api/article'
+import { articleSort, getArticleList, delArticle, updatePub } from '../../api/article'
 import debounce from '../../utils/debounce'
 import moment from 'moment'
 
@@ -272,11 +272,54 @@ export default {
       console.log(scope)
       this.$router.push({ name: 'edit', params: { id: scope.row.id }})
     },
-    delArticle(scope) {
-      console.log(scope)
+    del(scope) {
+      this.$confirm(`此操作将永久删除<span style="color: red">id：${scope.row.id}</span>的文章，是否确定删除？`, '提醒', {
+        confirmButtonText: '确认删除',
+        cancelButtonText: '再考虑一下',
+        dangerouslyUseHTMLString: true,
+        type: 'warning'
+      }).then(() => {
+        delArticle({ id: scope.row.id }).then(res => {
+          this.$message({
+            type: 'success',
+            message: '删除成功'
+          })
+          this.init()
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消删除'
+          })
+        })
+      })
     },
     pubArticle(scope) {
-      console.log(scope)
+      const pub = 1 - scope.row.pub
+      const { id } = scope.row
+      this.$confirm(`是否<span style="color: #3a835d">${pub ? '发布' : '下架'}id：${id}</span>的文章`, '温馨提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        dangerouslyUseHTMLString: true
+      }).then(() => {
+        updatePub({ pub, id }).then(result => {
+          this.$message({
+            type: 'success',
+            message: result.msg
+          })
+          this.getArticle()
+        }).catch(err => {
+          this.$message({
+            type: 'error',
+            message: err,
+            duration: 200
+          })
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消'
+        })
+      })
     },
     currentChange(page) {
       this.pagination.page = page
