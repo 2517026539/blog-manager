@@ -35,7 +35,7 @@
             :value="item.sort"
           />
         </el-select>
-        <el-button type="primary" :style="{marginLeft: '20px'}" @click="addTag">添加分类标签</el-button>
+        <!-- <el-button type="primary" :style="{marginLeft: '20px'}" @click="addTag">添加分类标签</el-button>-->
       </el-form-item>
     </el-form>
   </div>
@@ -170,7 +170,13 @@ export default {
                 type: 'success',
                 message: '文章保存成功'
               })
-              console.log(res)
+              this.articleList = {
+                title: '',
+                subtitle: '',
+                content: '',
+                sort: '',
+                render: ''
+              }
             }).catch(err => {
               this.$message({
                 type: 'fail',
@@ -201,7 +207,13 @@ export default {
                 type: 'success',
                 message: '文章发布成功'
               })
-              console.log(res)
+              this.articleList = {
+                title: '',
+                subtitle: '',
+                content: '',
+                sort: '',
+                render: ''
+              }
             }).catch(err => {
               this.$message({
                 type: 'fail',
@@ -217,9 +229,9 @@ export default {
         }
       })
     },
-    addTag() {
+    /* addTag() {
       console.log(1)
-    },
+    },*/
     handlerEditorImgAdd(filename, imgfile) {
       const formatdata = new FormData()
       formatdata.append('image', imgfile)
